@@ -1,5 +1,5 @@
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import Column, String, Integer, Text
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import String
 
 
 class BaseModel(DeclarativeBase):
@@ -8,8 +8,8 @@ class BaseModel(DeclarativeBase):
 
 class Profile(BaseModel):
     __tablename__ = "profiles"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(50))
-    age = Column(Integer)
-    description = Column(Text)
-    interests = Column(String(255))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(50))
+    age: Mapped[int] = mapped_column()
+    description: Mapped[str] = mapped_column()
+    interests: Mapped[str] = mapped_column(String(255))
