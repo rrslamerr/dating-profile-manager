@@ -8,7 +8,7 @@ class ProfileBase(BaseModel):
     interests: str | None = Field(max_length=300)
 
 
-class ProfileCreate(BaseModel):
+class ProfileCreate(ProfileBase):
     pass
 
 
