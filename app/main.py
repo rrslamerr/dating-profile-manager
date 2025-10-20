@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.routers import profiles
 from app.database import setup_database
-from .models import BaseModel
+from app.models import BaseModel
 
 app = FastAPI(title="Dating Profile Manager")
 app.include_router(profiles.router)
