@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String
-from app.database import BaseModel
+from backend.app.database import BaseModel
 
 
 class Profile(BaseModel):

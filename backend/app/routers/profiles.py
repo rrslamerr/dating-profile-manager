@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from app.schemas import ProfileCreate
-from app.dependencies import SessionDep
-from app import crud
+from backend.app.schemas import ProfileCreate
+from backend.app.dependencies import SessionDep
+from backend.app import crud
 
 router = APIRouter(prefix="/profiles", tags=["Profiles"])
 
