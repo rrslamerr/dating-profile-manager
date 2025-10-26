@@ -1,7 +1,7 @@
 from sqlalchemy import select
-from backend.app.models import Profile
-from backend.app.schemas import ProfileCreate
-from backend.app.dependencies import SessionDep
+from app.models import Profile
+from app.schemas import ProfileCreate
+from app.dependencies import SessionDep
 
 
 async def create_profile(data: ProfileCreate, session: SessionDep):
