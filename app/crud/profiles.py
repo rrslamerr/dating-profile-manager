@@ -19,3 +19,16 @@ async def get_profiles(session: SessionDep):
     query = select(Profile)
     result = await session.execute(query)
     return result.scalars().all()
+
+
+async def delete_profile(profile_id: int, session: SessionDep):
+    query = select(Profile).where(Profile.id == profile_id)
+    result = await session.execute(query)
+    profile = result.scalar_one_or_none()
+
+    if profile is None:
+        return False
+
+    await session.delete(profile)
+    await session.commit()
+    return True
