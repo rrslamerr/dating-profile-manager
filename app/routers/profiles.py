@@ -12,6 +12,15 @@ async def create_profile(data: ProfileCreate, session: SessionDep):
     return await crud.create_profile(data, session)
 
 
+@router.get("/{profile_id}")
+async def get_profile(profile_id: int, session: SessionDep):
+    """Возвращает профиль по id"""
+    profile = await crud.get_profile(profile_id, session)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return profile
+
+
 @router.get("/")
 async def get_profiles(session: SessionDep):
     """Возвращает список всех профилей пользователей"""
