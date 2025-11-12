@@ -13,6 +13,8 @@ async def create_profile(data: ProfileCreate, session: SessionDep):
     )
     session.add(new_profile)
     await session.commit()
+    await session.refresh(new_profile)
+    return new_profile
 
 
 async def get_profiles(session: SessionDep):
