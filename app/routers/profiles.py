@@ -1,31 +1,45 @@
-# Импортируем класс APIRouter для создания группы маршрутов (эндпоинтов)
-from fastapi import APIRouter
-
-# Импортируем схему ProfileCreate для проверки и описания входных данных при создании профиля
+from fastapi import APIRouter, HTTPException
 from app.schemas import ProfileCreate
-
-# Импортируем зависимость для получения асинхронной сессии базы данных
 from app.dependencies import SessionDep
-
-# Импортируем модуль crud, в котором описана логика работы с базой данных
 from app import crud
 
-
-# Создаём экземпляр роутера для работы с профилями пользователей
-# prefix — общий путь для всех маршрутов этого роутера (/profiles)
-# tags — используется для группировки маршрутов в документации Swagger
 router = APIRouter(prefix="/profiles", tags=["Profiles"])
 
 
 @router.post("/")
 async def create_profile(data: ProfileCreate, session: SessionDep):
     """Создаёт новый профиль пользователя"""
-    # Передаём данные в функцию crud.create_profile, которая сохраняет профиль в базе
     return await crud.create_profile(data, session)
+
+
+@router.get("/{profile_id}")
+async def get_profile(profile_id: int, session: SessionDep):
+    """Возвращает профиль по id"""
+    profile = await crud.get_profile(profile_id, session)
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return profile
 
 
 @router.get("/")
 async def get_profiles(session: SessionDep):
     """Возвращает список всех профилей пользователей"""
-    # Вызываем crud.get_profiles, чтобы получить все записи из базы данных
     return await crud.get_profiles(session)
+
+
+@router.put("/{profile_id}")
+async def update_profile(profile_id: int, data: ProfileCreate, session: SessionDep):
+    """Обновляет профиль по id"""
+    updated = await crud.update_profile(profile_id, data, session)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return updated
+
+
+@router.delete("/{profile_id}")
+async def delete_profile(profile_id: int, session: SessionDep):
+    """Удаляет профиль по id"""
+    deleted = await crud.delete_profile(profile_id, session)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return {"message": "Profile deleted successfully"}
