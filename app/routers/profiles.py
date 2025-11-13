@@ -27,6 +27,15 @@ async def get_profiles(session: SessionDep):
     return await crud.get_profiles(session)
 
 
+@router.put("/{profile_id}")
+async def update_profile(profile_id: int, data: ProfileCreate, session: SessionDep):
+    """Обновляет профиль по id"""
+    updated = await crud.update_profile(profile_id, data, session)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return updated
+
+
 @router.delete("/{profile_id}")
 async def delete_profile(profile_id: int, session: SessionDep):
     """Удаляет профиль по id"""
