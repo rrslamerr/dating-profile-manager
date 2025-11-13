@@ -29,12 +29,32 @@ async def get_profiles(session: SessionDep):
     return result.scalars().all()
 
 
+async def update_profile(profile_id: int, data: ProfileCreate, session: SessionDep):
+    query = select(Profile).where(Profile.id == profile_id)
+    result = await session.execute(query)
+    profile = result.scalar_one_or_none()
+
+    if profile is None:
+        return False
+
+    profile.name = data.name
+    profile.age = data.age
+    profile.description = data.description
+    profile.interests = data.interests
+
+    await session.commit()
+    await session.refresh(profile)
+    return profile
+
+
 async def delete_profile(profile_id: int, session: SessionDep):
     query = select(Profile).where(Profile.id == profile_id)
     result = await session.execute(query)
     profile = result.scalar_one_or_none()
+
     if profile is None:
         return False
+
     await session.delete(profile)
     await session.commit()
     return True
