@@ -18,5 +18,8 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 app.include_router(pages.router)
 app.include_router(profiles.router)
