@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from app.routers import profiles
+from fastapi.staticfiles import StaticFiles
+from app.routers import profiles, pages
 from app.database import setup_database
 from app.models import BaseModel
 
@@ -17,5 +18,5 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
-
+app.include_router(pages.router)
 app.include_router(profiles.router)
