@@ -232,6 +232,7 @@ main {
     display: flex;
     gap: 0.8rem;
     margin-top: 1.5rem;
+    justify-content: space-between;
 }
 
 /* ==================== BUTTONS ==================== */
@@ -241,7 +242,9 @@ main {
     border-radius: 12px;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.95rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -283,7 +286,9 @@ main {
 }
 
 .btn-edit:hover {
+    background: linear-gradient(135deg, #7ef17e, #48ff48);
     transform: translateY(-2px);
+    font-weight: 700;
     box-shadow: 0 8px 25px rgba(144, 238, 144, 0.4);
 }
 
@@ -295,7 +300,9 @@ main {
 }
 
 .btn-delete:hover {
+    background: linear-gradient(135deg, #ff5441, #ff6959);
     transform: translateY(-2px);
+    font-weight: 700;
     box-shadow: 0 8px 25px rgba(255, 180, 171, 0.4);
 }
 
