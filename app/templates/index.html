@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Все профили - Менеджер профилей знакомств{% endblock %}
+
+{% block content %}
+<div class="profiles-header">
+    <h2>Все профили ({{ profiles|length }})</h2>
+</div>
+
+{% if profiles %}
+<div class="profiles-grid">
+    {% for profile in profiles %}
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">{{ profile.name[0]|upper }}</div>
+            <div class="profile-info">
+                <h3>{{ profile.name }}</h3>
+                <p class="age">{{ profile.age }} лет</p>
+            </div>
+        </div>
+
+        {% if profile.description %}
+        <div class="profile-description">
+            <p>{{ profile.description }}</p>
+        </div>
+        {% endif %}
+
+        {% if profile.interests %}
+        <div class="profile-interests">
+            <strong>Интересы:</strong> {{ profile.interests }}
+        </div>
+        {% endif %}
+
+        <div class="profile-actions">
+            <a href="/edit/{{ profile.id }}" class="btn-edit">Редактировать</a>
+            <form action="/delete/{{ profile.id }}" method="post" style="display: inline;"
+                  onsubmit="return confirm('Удалить профиль {{ profile.name }}?');">
+                <button type="submit" class="btn-delete">Удалить</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <p>Профилей пока нет</p>
+    <a href="/create" class="btn-primary">Создать первый профиль</a>
+</div>
+{% endif %}
+{% endblock %}

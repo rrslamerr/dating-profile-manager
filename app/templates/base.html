@@ -1,14 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Менеджер профилей знакомств{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-{% block body %}
+<header>
+    <nav>
+        <div class="container">
+            <h1><a href="/">Менеджер профилей знакомств</a></h1>
+            <ul>
+                <li><a href="/create" class="btn-primary">+ Создать профиль</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-{% endblock %}
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Менеджер профилей знакомств</p>
+    </div>
+</footer>
 </body>
 </html>

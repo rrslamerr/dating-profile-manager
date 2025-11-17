@@ -6,50 +6,421 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #08652b 0%, #000000 100%);
+    background: linear-gradient(135deg, #FFE5D9 0%, #FFDAC1 50%, #FFB7B2 100%);
     min-height: 100vh;
-    color: #F0F0F0;
+    color: #2d2d2d;
+    position: relative;
+    overflow-x: hidden;
 }
 
-.landing-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+/* Декоративные элементы фона */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 183, 178, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
 }
 
-.landing-main {
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 229, 217, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==================== HEADER ==================== */
+header {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(255, 183, 178, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 183, 178, 0.3);
+}
+
+nav {
+    padding: 1.2rem 0;
+}
+
+nav .container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    min-height: 85vh;
+}
+
+nav h1 a {
+    background: linear-gradient(135deg, #FF8882, #FFB7B2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.6rem;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #2d2d2d;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+nav a:not(.btn-primary):hover {
+    background: rgba(255, 183, 178, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ==================== MAIN CONTENT ==================== */
+main {
+    padding: 2.5rem 0;
+    min-height: calc(100vh - 200px);
+}
+
+/* Profiles header */
+.profiles-header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 2rem;
+    border-radius: 20px;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 8px 32px rgba(255, 183, 178, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.landing-title {
-    font-size: 3.5rem;
+.profiles-header h2 {
+    background: linear-gradient(135deg, #FF8882, #FFB7B2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.8rem;
+}
+
+/* Profiles grid */
+.profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(255, 183, 178, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Градиентный акцент на карточке */
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF8882, #FFB7B2, #FFDAC1);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.profile-card:hover::before {
+    opacity: 1;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(255, 183, 178, 0.3);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.profile-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF8882, #FFB7B2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    font-size: 1.8rem;
+    font-weight: bold;
+    box-shadow: 0 8px 24px rgba(255, 136, 130, 0.3);
+    position: relative;
 }
 
-.landing-button {
-    margin-bottom: 1.5rem;
+.profile-avatar::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF8882, #FFB7B2);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.5;
+}
+
+.profile-info h3 {
+    color: #2d2d2d;
+    margin-bottom: 0.3rem;
+    font-size: 1.3rem;
+}
+
+.profile-info .age {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.profile-description {
+    margin: 1.2rem 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.profile-interests {
+    background: linear-gradient(135deg, rgba(255, 229, 217, 0.5), rgba(255, 218, 193, 0.5));
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 1.2rem 0;
+    font-size: 0.95rem;
+    color: #555;
+    border: 1px solid rgba(255, 183, 178, 0.3);
+}
+
+.profile-actions {
+    display: flex;
+    gap: 0.8rem;
     margin-top: 1.5rem;
 }
 
-.btn-large {
-    padding: 1.2rem 3rem;
-    font-size: 1.3rem;
-    border-radius: 50px;
+/* ==================== BUTTONS ==================== */
+.btn-primary, .btn-edit, .btn-delete, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    transition: all 0.3s;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
-    background-color: #282828;
+    background: linear-gradient(135deg, #FF8882, #FFB7B2);
     color: white;
+    box-shadow: 0 4px 15px rgba(255, 136, 130, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 136, 130, 0.4);
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #90EE90, #98FB98);
+    color: #2d2d2d;
+    flex: 1;
+    box-shadow: 0 4px 15px rgba(144, 238, 144, 0.3);
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(144, 238, 144, 0.4);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #FFB4AB, #FFC6BE);
+    color: #2d2d2d;
+    flex: 1;
+    box-shadow: 0 4px 15px rgba(255, 180, 171, 0.3);
+}
+
+.btn-delete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 180, 171, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(200, 200, 200, 0.5);
+    backdrop-filter: blur(10px);
+    color: #2d2d2d;
+}
+
+.btn-secondary:hover {
+    background: rgba(200, 200, 200, 0.7);
+    transform: translateY(-2px);
+}
+
+/* Empty state */
+.empty-state {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 4rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(255, 183, 178, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.empty-state p {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* ==================== FORMS ==================== */
+.form-container {
+    max-width: 650px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(255, 183, 178, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.form-container h2 {
+    background: linear-gradient(135deg, #FF8882, #FFB7B2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.profile-form .form-group {
+    margin-bottom: 1.8rem;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 0.6rem;
+    color: #2d2d2d;
+    font-weight: 600;
+}
+
+.profile-form input,
+.profile-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(255, 183, 178, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.profile-form input:focus,
+.profile-form textarea:focus {
+    outline: none;
+    border-color: #FF8882;
+    box-shadow: 0 0 0 4px rgba(255, 136, 130, 0.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.form-actions button,
+.form-actions a {
+    flex: 1;
+    text-align: center;
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1.8rem 0;
+    margin-top: 4rem;
+    text-align: center;
+    color: #666;
+    border-top: 1px solid rgba(255, 183, 178, 0.3);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    nav .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .profiles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .profile-card {
+        padding: 1.5rem;
+    }
 }
