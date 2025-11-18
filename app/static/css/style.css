@@ -204,6 +204,9 @@ main {
     color: #2d2d2d;
     margin-bottom: 0.3rem;
     font-size: 1.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .profile-info .age {
@@ -215,6 +218,13 @@ main {
     margin: 1.2rem 0;
     color: #555;
     line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .profile-interests {
@@ -226,6 +236,9 @@ main {
     font-size: 0.95rem;
     color: #555;
     border: 1px solid rgba(255, 183, 178, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .profile-actions {
@@ -338,7 +351,7 @@ main {
 /* ==================== FORMS ==================== */
 .form-container {
     max-width: 650px;
-    margin: 0 auto;
+    margin: 2.5rem auto;
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -374,6 +387,7 @@ main {
     padding: 1rem;
     border: 2px solid rgba(255, 183, 178, 0.3);
     border-radius: 12px;
+    resize: none;
     font-size: 1rem;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
