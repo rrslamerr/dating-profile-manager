@@ -8,7 +8,7 @@ router = APIRouter(tags=["Profiles"])
 templates = Jinja2Templates(directory="app/templates")
 
 
-@router.get("/")
+@router.get("/", response_class=HTMLResponse)
 async def home(request: Request, session: SessionDep):
     """Главная страница"""
     profiles = await crud.get_profiles(session)
@@ -26,6 +26,31 @@ async def edit_page(request: Request, profile_id: int, session: SessionDep):
     return templates.TemplateResponse(
         "edit.html", {"request": request, "profile": profile}
     )
+
+
+@router.get("/create", response_class=HTMLResponse)
+async def create_page(request: Request):
+    """Страница создания профиля"""
+    return templates.TemplateResponse("create.html", {"request": request})
+
+
+@router.post("/create")
+async def create_profile_form(
+    request: Request,
+    session: SessionDep,
+    name: str = Form(...),
+    age: int = Form(...),
+    description: str = Form(None),
+    interests: str = Form(None),
+):
+    """Обработка формы создания профиля"""
+    from app.schemas import ProfileCreate
+
+    profile_data = ProfileCreate(
+        name=name, age=age, description=description, interests=interests
+    )
+    await crud.create_profile(profile_data, session)
+    return RedirectResponse(url="/", status_code=303)
 
 
 @router.post("/edit/{profile_id}")
