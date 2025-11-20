@@ -2,7 +2,7 @@ aiosqlite==0.21.0
 annotated-types==0.7.0
 anyio==4.11.0
 colorama==0.4.6
-fastapi==0.121.2
+fastapi==0.121.3
 greenlet==3.2.4
 h11==0.16.0
 idna==3.11
