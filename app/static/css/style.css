@@ -49,8 +49,8 @@ body::after {
 /* ==================== HEADER ==================== */
 header {
     background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 8px 32px rgba(255, 183, 178, 0.2);
     position: sticky;
     top: 0;
@@ -76,6 +76,8 @@ nav h1 a {
     font-size: 1.6rem;
     text-decoration: none;
     font-weight: 700;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
 nav ul {
@@ -93,7 +95,16 @@ nav a {
     font-weight: 500;
 }
 
-nav a:not(.btn-primary):hover {
+nav h1 a:hover {
+    background: linear-gradient(135deg, #ff6b63, #ff9a94);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 4px 8px rgba(255, 136, 130, 0.3));
+}
+
+nav ul a:not(.btn-primary):hover {
     background: rgba(255, 183, 178, 0.2);
     transform: translateY(-2px);
 }
@@ -125,7 +136,6 @@ main {
     font-size: 1.8rem;
 }
 
-/* Profiles grid */
 .profiles-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -145,15 +155,12 @@ main {
     overflow: hidden;
 }
 
-/* Градиентный акцент на карточке */
 .profile-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #FF8882, #FFB7B2, #FFDAC1);
+    inset: 0;
+    border-radius: 24px;
+    background: radial-gradient(circle at top left, rgba(255, 136, 130, 0.15), transparent 60%);
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -263,6 +270,7 @@ main {
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    min-height: 44px;
 }
 
 .btn-primary {
@@ -298,6 +306,21 @@ main {
     box-shadow: 0 4px 15px rgba(144, 238, 144, 0.3);
 }
 
+.btn-edit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-edit:hover::before {
+    left: 100%;
+}
+
 .btn-edit:hover {
     background: linear-gradient(135deg, #7ef17e, #48ff48);
     transform: translateY(-2px);
@@ -310,6 +333,21 @@ main {
     color: #2d2d2d;
     flex: 1;
     box-shadow: 0 4px 15px rgba(255, 180, 171, 0.3);
+}
+
+.btn-delete::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-delete:hover::before {
+    left: 100%;
 }
 
 .btn-delete:hover {
